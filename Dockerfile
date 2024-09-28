@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -yq software-properties-common curl git python3.9 \
     python3-venv python3-pip gnupg wget apt-utils vim libzip-dev unzip fzf 
 
-# Add Google's Coral EdgeTPU repository and key using best practices
+# Add Google's Coral EdgeTPU repository and key
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
     | gpg --dearmor > /usr/share/keyrings/coral-edgetpu-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/coral-edgetpu-archive-keyring.gpg] https://packages.cloud.google.com/apt coral-edgetpu-stable main" \
