@@ -17,10 +17,9 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
 RUN apt-get update && \
     apt-get install -yq libedgetpu1-std python3-pycoral
 
-# Create directory for Coral and clone pycoral repository
-RUN mkdir coral && \
-    cd coral && \
-    git clone https://github.com/google-coral/pycoral.git && \
+WORKDIR /root
+
+RUN git clone https://github.com/google-coral/pycoral.git && \
     cd pycoral
 
 # Copy the requirements file into the container
@@ -29,9 +28,8 @@ COPY requirements.txt .
 # Install any needed packages specified in requirements.txt
 RUN pip3 install -r requirements.txt
 
-WORKDIR /coral/pycoral
-
-COPY hello_world.ipynb /coral/pycoral/
+COPY hello.ipynb /root
+COPY hello.sh /root/
 
 # Command to run when the container starts
 CMD ["/bin/bash"]
